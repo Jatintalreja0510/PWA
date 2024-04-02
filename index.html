@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="#4285f4" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-commerce Store</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <script src="service-worker.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>E-commerce Store</h1>
+    </header>
+    <div class="container">
+      <div class="product">
+        <img src="surf excel.jpg" alt="Product 1" />
+        <div class="product-info">
+          <h2>Product 1</h2>
+          <p>Description of product 1 goes here.</p>
+          <p>$19.99</p>
+          <button>Add to Cart</button>
+        </div>
+      </div>
+      <div class="product">
+        <img src="dettol.jpg" alt="Product 2" />
+        <div class="product-info">
+          <h2>Product 2</h2>
+          <p>Description of product 2 goes here.</p>
+          <p>$29.99</p>
+          <button>Add to Cart</button>
+        </div>
+      </div>
+      <!-- More products can be added here -->
+    </div>
+    <script>
+      // Add event listener to execute code when page loads
+      window.addEventListener("load", () => {
+        // Call registerSW function when page loads
+        registerSW();
+      });
+
+      // Register the Service Worker
+      async function registerSW() {
+        // Check if browser supports Service Worker
+        if ("serviceWorker" in navigator) {
+          try {
+            // Register the Service Worker named 'serviceworker.js'
+            await navigator.serviceWorker.register("service-worker.js");
+          } catch (e) {
+            // Log error message if registration fails
+            console.error("ServiceWorker registration failed: ", e);
+          }
+        }
+      }
+      if ("Notification" in window) {
+        Notification.requestPermission().then(function (permission) {
+          if (permission === "granted") {
+            console.log("Notification permission granted.");
+          } else {
+            console.warn("Notification permission denied.");
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
